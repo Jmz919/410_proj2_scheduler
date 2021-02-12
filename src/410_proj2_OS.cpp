@@ -67,7 +67,7 @@ int main(){
 	std::queue<PCB> ready_Q;
 
 	//round robin
-	Scheduler_RR  scheduler1(ready_Q,DEFAULT_TIME_SLICE);
+	Scheduler_RR  scheduler1(ready_Q,DEFAULT_TIME_SLICE); // @suppress("Abstract class cannot be instantiated")
 #ifdef TESTFILE1
 	int numb_failed_tests = test_simulation(std::string("RR"),scheduler1,9.5,1.75,15.25);//testdata1
 #else
@@ -76,7 +76,7 @@ int main(){
 	resetContainer(ready_Q);
 
 	//SRTF
-	Scheduler_SRTF  scheduler2(ready_Q);
+	Scheduler_SRTF  scheduler2(ready_Q); // @suppress("Abstract class cannot be instantiated")
 #ifdef TESTFILE1
 	numb_failed_tests += test_simulation(std::string("SRTF"),scheduler2,4.75,4.75,10.5);//testdata1
 #else
@@ -86,7 +86,7 @@ int main(){
 	resetContainer(ready_Q);
 
 	//FIFO
-	Scheduler_FIFO  scheduler3(ready_Q);
+	Scheduler_FIFO  scheduler3(ready_Q); // @suppress("Abstract class cannot be instantiated")
 #ifdef TESTFILE1
 	numb_failed_tests+= test_simulation(std::string("FIFO"),scheduler3,8.25,8.25,14);	//testdata1
 #else

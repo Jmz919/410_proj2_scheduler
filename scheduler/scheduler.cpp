@@ -11,14 +11,6 @@
 #include "../includes/scheduler.h"
 #include "../includes/PCB.h"
 
-//Scheduler::Scheduler(std::queue<PCB> &queue, bool preemptive = false, int time_slice =
-//			UNINITIALIZED) :	ready_q(&queue), preemptive(preemptive), time_slice(time_slice) {
-//};
-//
-//Scheduler::~Scheduler() {
-//	delete ready_q;
-//};
-
 	//add a process, either a new one or one that
 	//had been running on the CPU and has been preempted
 void Scheduler::add(PCB p) {
@@ -54,11 +46,7 @@ bool  Scheduler::time_to_switch_processes(int tick_count, PCB &p) {
 		return true;
 	}
 
-	if (tick_count > time_slice) {
-		return true;
-	}
-
-	return false;
+	return tick_count > time_slice;
 };
 
 
