@@ -9,12 +9,13 @@
  */
 
 #include <queue>
+#include "../includes/constants.h"
 #include "../includes/PCB.h"
 #include "../includes/scheduler_RR.h"
 
 //override base class behaviour if necessary, otherwise call it
 bool Scheduler_RR::time_to_switch_processes(int tick_count, PCB &p) {
-	return tick_count > time_slice;
+	return tick_count % time_slice == 0 || p.remaining_cpu_time == 0 || p.process_number == UNINITIALIZED;
 };
 
 //RR - preemptive - no sorting of ready_q needed.

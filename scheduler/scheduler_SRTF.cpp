@@ -1,8 +1,8 @@
 /*
  * SchedulerSRTF.cpp
  *
- *  Created on: Sep 10, 2019
- *      Author: keith
+ *  Created on: Feb 13, 2021
+ *      Author: Josh Zutell
  *
  *      implements shortest remaining time first scheduling algorithm
  *     pre-emptive
@@ -21,7 +21,7 @@ bool sortCPUTime(PCB i, PCB j) {
 
 //override base class behaviour if necessary, otherwise call it
 bool  Scheduler_SRTF::time_to_switch_processes(int tick_count, PCB &p) {
-	return tick_count > time_slice;
+	return tick_count % time_slice == 0 || p.remaining_cpu_time == 0 || p.process_number == UNINITIALIZED;
 };
 
 //SRTF-preemptive - sort ready_q by remaining_cpu_time whenever add(PCB p) or time_to_switch_processes is called

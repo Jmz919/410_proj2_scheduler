@@ -22,7 +22,7 @@
 #include "../includes/tester.h"
 
 //use first or second test file
-//#define TESTFILE1
+#define TESTFILE2
 
 using namespace std;
 
@@ -67,7 +67,7 @@ int main(){
 	std::queue<PCB> ready_Q;
 
 	//round robin
-	Scheduler_RR  scheduler1(ready_Q,DEFAULT_TIME_SLICE); // @suppress("Abstract class cannot be instantiated")
+	Scheduler_RR  scheduler1(ready_Q,DEFAULT_TIME_SLICE);
 #ifdef TESTFILE1
 	int numb_failed_tests = test_simulation(std::string("RR"),scheduler1,9.5,1.75,15.25);//testdata1
 #else
@@ -76,19 +76,18 @@ int main(){
 	resetContainer(ready_Q);
 
 	//SRTF
-	Scheduler_SRTF  scheduler2(ready_Q); // @suppress("Abstract class cannot be instantiated")
+	Scheduler_SRTF  scheduler2(ready_Q);
 #ifdef TESTFILE1
 	numb_failed_tests += test_simulation(std::string("SRTF"),scheduler2,4.75,4.75,10.5);//testdata1
 #else
 	numb_failed_tests += test_simulation(std::string("SRTF"),scheduler2,3.00,0.5,7);//testdata2
-//	numb_failed_tests += test_simulation(std::string("SRTF"),scheduler2,4.00,0.5,9);//testdata2
 #endif
 	resetContainer(ready_Q);
 
 	//FIFO
-	Scheduler_FIFO  scheduler3(ready_Q); // @suppress("Abstract class cannot be instantiated")
+	Scheduler_FIFO  scheduler3(ready_Q);
 #ifdef TESTFILE1
-	numb_failed_tests+= test_simulation(std::string("FIFO"),scheduler3,8.25,8.25,14);	//testdata1
+	numb_failed_tests += test_simulation(std::string("FIFO"),scheduler3,8.25,8.25,14);	//testdata1
 #else
 	numb_failed_tests += test_simulation(std::string("FIFO"),scheduler3,4.75,4.75,8.75);   //testdata2
 #endif

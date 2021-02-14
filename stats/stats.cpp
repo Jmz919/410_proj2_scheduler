@@ -1,8 +1,8 @@
 /*
  * Stats.cpp
  *
- *  Created on: Sep 10, 2019
- *      Author: keith
+ *  Created on: Feb 13, 2021
+ *      Author: Josh Zutell
  */
 
 #include <vector>
@@ -16,16 +16,14 @@ Stats::Stats(std::vector<PCB> &finished_vector) {
 	av_response_time = 0;
 };
 
-//~Stats(){};
-
 //loops thru vec, prints 1 line for each process using the following format
 //Process 1 Required CPU time:2  arrived:0 started:0 finished:2
 //if there are 10 processes in vector, should print 10 lines
 void Stats::showAllProcessInfo(){
 	std::vector<PCB> processes = *vec;
 	for (long unsigned int i = 0; i < processes.size(); i++) {
-		std::cout << "Process " << i << "Required CPU time: " << processes[i].required_cpu_time << " arrived: "
-				<< processes[i].arrival_time << " started: " << processes[i].start_time << " finished:" << processes[i].finish_time;
+		std::cout << "Process " << i << " Required CPU time: " << processes[i].required_cpu_time << " arrived: "
+				<< processes[i].arrival_time << " started: " << processes[i].start_time << " finished:" << processes[i].finish_time << "\n";
 	}
 };
 
