@@ -21,7 +21,11 @@ bool sortCPUTime(PCB i, PCB j) {
 
 //override base class behaviour if necessary, otherwise call it
 bool  Scheduler_SRTF::time_to_switch_processes(int tick_count, PCB &p) {
-	return p.remaining_cpu_time > ready_q->front().remaining_cpu_time || p.remaining_cpu_time == 0 || p.process_number == UNINITIALIZED;
+	if (!ready_q->empty() && p.remaining_cpu_time > ready_q->front().remaining_cpu_time) {
+//		return p.remaining_cpu_time > ready_q->front().remaining_cpu_time || p.remaining_cpu_time == 0 || p.process_number == UNINITIALIZED;
+		return true;
+	}
+	return p.remaining_cpu_time == 0 || p.process_number == UNINITIALIZED;
 };
 
 //SRTF-preemptive - sort ready_q by remaining_cpu_time whenever add(PCB p) or time_to_switch_processes is called
