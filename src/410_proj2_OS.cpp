@@ -22,7 +22,7 @@
 #include "../includes/tester.h"
 
 //use first or second test file
-#define TESTFILE1
+#define TESTFILE2
 
 using namespace std;
 

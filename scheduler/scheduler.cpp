@@ -16,6 +16,7 @@
 	//had been running on the CPU and has been preempted
 void Scheduler::add(PCB p) {
 	ready_q->push(p);
+	sort();
 };
 
 	//get next process
