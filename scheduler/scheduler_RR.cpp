@@ -1,8 +1,8 @@
 /*
  * SchedulerSTRR.cpp
  *
- *  Created on: Sep 7, 2019
- *      Author: keith
+ *  Created on: Feb 18, 2021
+ *      Author: Josh Zutell
  *
  *      implements round robin scheduling algorithm
  *      pre-emptive
@@ -15,11 +15,8 @@
 
 //override base class behaviour if necessary, otherwise call it
 bool Scheduler_RR::time_to_switch_processes(int tick_count, PCB &p) {
-	return (p.required_cpu_time - p.remaining_cpu_time) % time_slice == 0 || p.remaining_cpu_time == 0 || p.process_number == UNINITIALIZED;
+	return Scheduler::time_to_switch_processes(tick_count, p);
 };
 
 //RR - preemptive - no sorting of ready_q needed.
-void Scheduler_RR::sort(){
-	std::queue<PCB> my_queue = *ready_q;
-};
-
+void Scheduler_RR::sort(){};

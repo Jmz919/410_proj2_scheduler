@@ -1,7 +1,7 @@
 /*
  * SchedulerSRTF.cpp
  *
- *  Created on: Feb 13, 2021
+ *  Created on: Feb 18, 2021
  *      Author: Josh Zutell
  *
  *      implements shortest remaining time first scheduling algorithm
@@ -11,7 +11,6 @@
 #include <queue>
 #include <vector>
 #include <algorithm>
-
 #include "../includes/PCB.h"
 #include "../includes/scheduler_SRTF.h"
 
@@ -19,10 +18,11 @@ bool sortCPUTime(PCB i, PCB j) {
 	return i.remaining_cpu_time < j.remaining_cpu_time;
 }
 
-//override base class behaviour if necessary, otherwise call it
+//override base class behavior if necessary, otherwise call it
 bool  Scheduler_SRTF::time_to_switch_processes(int tick_count, PCB &p) {
+	// If another process on ready_q and the next process remaining cpu time is less than current remaining cpu time
+	// Then it is time to switch
 	if (!ready_q->empty() && p.remaining_cpu_time > ready_q->front().remaining_cpu_time) {
-//		return p.remaining_cpu_time > ready_q->front().remaining_cpu_time || p.remaining_cpu_time == 0 || p.process_number == UNINITIALIZED;
 		return true;
 	}
 	return p.remaining_cpu_time == 0 || p.process_number == UNINITIALIZED;
@@ -32,13 +32,16 @@ bool  Scheduler_SRTF::time_to_switch_processes(int tick_count, PCB &p) {
 void Scheduler_SRTF::sort() {
 	std::vector<PCB> my_vec;
 
+	// Put all the processes in a vector to more easily sort
 	while (!ready_q->empty()) {
 		my_vec.push_back(ready_q->front());
 		ready_q->pop();
 	}
 
+	// Sort the vector and place them back into queue
 	std::sort(my_vec.begin(), my_vec.end(), sortCPUTime);
 	for (long unsigned int i = 0; i < my_vec.size(); i++) {
 		ready_q->push(my_vec[i]);
 	}
 };
+

@@ -1,7 +1,7 @@
 /*
  * Dispatcher.cpp
  *
- *  Created on: Feb 13, 2019
+ *  Created on: Feb 18, 2019
  *      Author: Josh Zutell
  */
 
@@ -23,5 +23,7 @@ void Dispatcher::put_on_CPU(PCB  &process){
 
 //is CPU idle or working
 bool Dispatcher::isValidJobOnCPU(){
+	// Check if cpu process is initialized to determine whether there is a valid job
 	return cpu->get_COPY_of_Current_Process().process_number != UNINITIALIZED;
 };
+
