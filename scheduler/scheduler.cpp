@@ -40,7 +40,7 @@ bool  Scheduler::time_to_switch_processes(int tick_count, PCB &p) {
 	}
 
 	// If preemptive switch if time slice is over, process is finished, or invalid process
-	return (p.required_cpu_time - p.remaining_cpu_time) % time_slice == 0 || p.remaining_cpu_time == 0
+	return (p.required_cpu_time - p.remaining_cpu_time) % time_slice == 0 || p.remaining_cpu_time <= 0
 			|| p.process_number == UNINITIALIZED;
 };
 

@@ -24,6 +24,7 @@ bool  Scheduler_SRTF::time_to_switch_processes(int tick_count, PCB &p) {
 	if (!ready_q->empty() && p.remaining_cpu_time > ready_q->front().remaining_cpu_time) {
 		return true;
 	}
+	// If current process is finished or invalid process then switch
 	return p.remaining_cpu_time <= 0 || p.process_number == UNINITIALIZED;
 };
 
