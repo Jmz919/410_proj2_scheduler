@@ -8,9 +8,6 @@
  *      not pre-emptive
  */
 
-#include <queue>
-#include "../includes/constants.h"
-#include "../includes/PCB.h"
 #include "../includes/scheduler_FIFO.h"
 
 //override base class behaviour if necessary, otherwise call it

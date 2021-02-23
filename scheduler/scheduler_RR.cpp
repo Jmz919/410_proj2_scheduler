@@ -8,9 +8,6 @@
  *      pre-emptive
  */
 
-#include <queue>
-#include "../includes/constants.h"
-#include "../includes/PCB.h"
 #include "../includes/scheduler_RR.h"
 
 //override base class behaviour if necessary, otherwise call it

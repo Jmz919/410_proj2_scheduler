@@ -5,11 +5,7 @@
  *      Author: Josh Zutell
  */
 
-#include <queue>
-#include <algorithm>
-#include "../includes/constants.h"
 #include "../includes/scheduler.h"
-#include "../includes/PCB.h"
 
 //add a process, either a new one or one that
 //had been running on the CPU and has been preempted
@@ -38,10 +34,12 @@ bool Scheduler::isEmpty() {
 //true - switch processes
 //false - do not switch
 bool  Scheduler::time_to_switch_processes(int tick_count, PCB &p) {
+	// If not preemptive switch only if current process is done running or current process is invalid
 	if (!preemptive) {
 		return p.remaining_cpu_time <= 0 || p.process_number == UNINITIALIZED;
 	}
 
+	// If preemptive switch if time slice is over, process is finished, or invalid process
 	return (p.required_cpu_time - p.remaining_cpu_time) % time_slice == 0 || p.remaining_cpu_time == 0
 			|| p.process_number == UNINITIALIZED;
 };

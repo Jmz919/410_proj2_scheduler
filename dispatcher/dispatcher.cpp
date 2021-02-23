@@ -6,9 +6,6 @@
  */
 
 #include "../includes/dispatcher.h"
-#include "../includes/constants.h"
-#include "../includes/CPU.h"
-#include "../includes/PCB.h"
 
 //pull current process (if any) off CPU and return it
 //if nothing on CPU returns an uninitialized PCB

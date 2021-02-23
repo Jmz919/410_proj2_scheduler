@@ -8,12 +8,11 @@
  *     pre-emptive
  */
 
-#include <queue>
 #include <vector>
 #include <algorithm>
-#include "../includes/PCB.h"
 #include "../includes/scheduler_SRTF.h"
 
+//Sort function to sort each process based on remaining cpu times
 bool sortCPUTime(PCB i, PCB j) {
 	return i.remaining_cpu_time < j.remaining_cpu_time;
 }
@@ -25,7 +24,7 @@ bool  Scheduler_SRTF::time_to_switch_processes(int tick_count, PCB &p) {
 	if (!ready_q->empty() && p.remaining_cpu_time > ready_q->front().remaining_cpu_time) {
 		return true;
 	}
-	return p.remaining_cpu_time == 0 || p.process_number == UNINITIALIZED;
+	return p.remaining_cpu_time <= 0 || p.process_number == UNINITIALIZED;
 };
 
 //SRTF-preemptive - sort ready_q by remaining_cpu_time whenever add(PCB p) or time_to_switch_processes is called

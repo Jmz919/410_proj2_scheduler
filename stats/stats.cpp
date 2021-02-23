@@ -5,9 +5,7 @@
  *      Author: Josh Zutell
  */
 
-#include <vector>
 #include "../includes/stats.h"
-#include "../includes/PCB.h"
 
 Stats::Stats(std::vector<PCB> &finished_vector) {
 	vec = &finished_vector;
@@ -22,13 +20,11 @@ Stats::Stats(std::vector<PCB> &finished_vector) {
 void Stats::showAllProcessInfo(){
 	std::vector<PCB> processes = *vec;
 	for (long unsigned int i = 0; i < processes.size(); i++) {
-		std::cout << "Process " << i << " Required CPU time: " << processes[i].required_cpu_time << " arrived: "
-				<< processes[i].arrival_time << " started: " << processes[i].start_time << " finished:" << processes[i].finish_time << "\n";
+		std::cout << "Process " << i << " Required CPU time:" << processes[i].required_cpu_time << "  arrived:"
+				<< processes[i].arrival_time << " started:" << processes[i].start_time << " finished:" << processes[i].finish_time << "\n";
 	}
 };
 
-//after a process is placed in the ready_q, how long does
-//it take before its placed on the processor?
 //response_time per process = start_time - arrival_time
 //this funtion returns the average over all processes
 float Stats::get_av_response_time(){
@@ -36,6 +32,8 @@ float Stats::get_av_response_time(){
 		return 0;
 	}
 
+    // loops through processes to calculate response time and adds to sum
+    // then divides by the number of processes to obtain average
 	float sum = 0;
 	std::vector<PCB> processes = *vec;
 	for (long unsigned int i = 0; i < processes.size(); i++) {
@@ -45,8 +43,6 @@ float Stats::get_av_response_time(){
 	return av_response_time;
 };
 
-//after a process is placed in the ready_q, how long does
-//it take to complete?
 //turnaround time per process = finish_time - arrival_time
 //this funtion returns the average over all processes
 float Stats::get_av_turnaround_time(){
@@ -54,6 +50,8 @@ float Stats::get_av_turnaround_time(){
 		return 0;
 	}
 
+    // loops through processes to calculate turnaround time and adds to sum
+    // then divides by the number of processes to obtain average
 	float sum = 0;
 	std::vector<PCB> processes = *vec;
 	for (long unsigned int i = 0; i < processes.size(); i++) {
@@ -63,15 +61,14 @@ float Stats::get_av_turnaround_time(){
 	return av_turnaround_time;
 };
 
-//after a process is placed in the ready_q, how much time does it
-//spend waiting for processor time?
 //wait time per process = finish_time - arrival_time-required_CPU_time
 //this funtion returns the average over all processes
 float Stats::get_av_wait_time(){
 	if (vec == NULL) {
 		return 0;
 	}
-
+    // loops through processes to calculate wait time and adds to sum
+    // then divides by the number of processes to obtain average
 	float sum = 0;
 	std::vector<PCB> processes = *vec;
 	for (long unsigned int i = 0; i < processes.size(); i++) {
